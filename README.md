@@ -10,3 +10,6 @@ A Keylogging solution written in python.
 # reach goals:
 1. some sort of persistence mechanism 
 2. have option where log never touches disk and goes straight to server to limit evidence
+
+# to do:
+1. add asci controll characters https://donsnotes.com/tech/charsets/ascii.html
