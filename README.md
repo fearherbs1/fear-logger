@@ -1,18 +1,30 @@
 # fear-logger
-A Keylogging solution written in python. 
+A Keylogging solution written in python.  
+The purpose of this is project to experiment writing some malware.
 
 # Goals:
-1. send encrypted file (rsa) with user keystrokes to remote server
-2. along with keystrokes include active window where typing happened
-3. randomize key log file name and location in temp dir
-4. compile to exe and be unnoticeable when opened. 
+## 2 versions
+### Static Version
+This version would be used when physical access  is possible.
+The script can be loaded on an usb stick, dropped on a forgotten about un-locked computer, and save
+keystrokes to that usb stick. The usb stick can then be later recovered to grab the data.
 
-# reach goals:
-1. some sort of persistence mechanism 
-2. have option where log never touches disk and goes straight to server to limit evidence
-3. usb mode that would log to usp stick instead of hidden location
+This version will be a lot less "noisy" as there is no network traffic involved nor persistence mechanism.  
+The keylog file will also never touch the disk and only the usb drive that it is stored on.
 
+- [X] collect keystrokes unknowingly to the user.
+- [X] along with keystrokes include the active window where typing happened and note when window is changed
+- [X] randomize key log file name.
+- [ ] compile to exe and be unnoticeable when opened.
+- [ ] Undetected by windows Defender
+- [ ] save keystrokes to usb stick that script is on.
+- [ ] obfuscate code
 
-# to do:
-1. add asci controll characters https://donsnotes.com/tech/charsets/ascii.html
- - most done
+### Server / Client Version
+- [ ] The same general concept as static version, but using sockets to write keystrokes to a remote server.  
+this will keep all keystrokes from touching the disk and producing forensic artifacts.
+- [ ] incorporate encryption between the client and server
+- [ ] some sort of persistence mechanism 
+
+# other to do:
+- [x] add asci control characters https://donsnotes.com/tech/charsets/ascii.html
