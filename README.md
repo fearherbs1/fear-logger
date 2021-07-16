@@ -17,7 +17,7 @@ The keylog file will also never touch the disk and only the usb drive that it is
 - [X] randomize key log file name.
 - [X] encode log in hex to avoid suspicion if log file is found while in operation.
 - [ ] create a small script that converts back to normal text for easy viewing of stolen data.
-- [ ] compile to exe and be unnoticeable when opened.
+- [ ] compile to exe and be unnoticeable when opened. (pyinstaller or Nuitka)
 - [ ] Undetected by windows Defender
 - [ ] save keystrokes to usb stick that script is on.
 - [ ] obfuscate code
