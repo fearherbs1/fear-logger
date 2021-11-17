@@ -23,3 +23,4 @@ This code is provided for educational purposes only.
 2. Drop on target system
 3. Log files are saved as a random file in the temp dir, for retrieval purposes all files created by this
 script end in `_32.txt`
+4. Using [cyberchef](https://gchq.github.io/CyberChef/#recipe=From_Base64('A-Za-z0-9%2B/%3D',true)) or some other tool, convert hex in log file to txt to view data. 

